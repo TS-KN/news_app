@@ -6,7 +6,9 @@
       v-for="(item,index) in data.store.state.news" :key="index">
     <div class="d-flex p-2">
       <div>
-        <p class="h5 text-left">{{ item.title }}</p>
+        <a :href="item.url" target="_blank">
+          <p class="h5 text-left">{{ item.title }}</p>
+        </a>
         <p class="text-left mt-5">{{ item.description }}</p>
       </div>
       <img :src="item.urlToImage" class="img-responsive" width="200" />
