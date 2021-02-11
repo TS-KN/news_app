@@ -19,9 +19,6 @@ import { ref, reactive, computed, onMounted } from "vue";
 import { useStore } from "vuex";
 import axios from 'axios'
 
-var url = 'http://newsapi.org/v2/top-headlines?' +
-          'country=us&' +
-          'apiKey=********************************';
 
 export default {
   name: "NewsContent",
@@ -31,12 +28,13 @@ export default {
       store: useStore(),
     })
     const getData = () => {
-      axios.get(url).then((result)=>{
+      axios.get(import.meta.env.VITE_API_URL).then((result)=>{
         data.store.state.news = result.data.articles
       })
     }
     onMounted(() => {
       getData()
+      console.log(import.meta.env.VITE_API_URL)
     })
     return {
       data
