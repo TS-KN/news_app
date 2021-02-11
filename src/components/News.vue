@@ -11,7 +11,7 @@
         </a>
         <p class="text-left mt-5">{{ item.description }}</p>
       </div>
-      <img :src="item.urlToImage" class="img-responsive" width="200" />
+      <img :src="item.image" class="img-responsive" width="200" />
     </div>
   </section>
 </template>
