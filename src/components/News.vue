@@ -7,7 +7,7 @@
     <div class="d-flex p-2">
       <div>
         <p class="h5 text-left">{{ item.title }}</p>
-        <p class="text-left mt-5">{{ item.content }}</p>
+        <p class="text-left mt-5">{{ item.description }}</p>
       </div>
       <img :src="item.urlToImage" class="img-responsive" width="200" />
     </div>
