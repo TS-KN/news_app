@@ -1,9 +1,9 @@
 <template>
-  <section class="alert alert-primary">
-    <h2>{{ data.topics }}</h2>
-  </section>
-  <section class="alert alert-secondary mt-3"
-      v-for="(item,index) in data.store.state.news" :key="index">
+  <section
+    class="alert alert-secondary mt-3"
+    v-for="(item, index) in data.store.state.news"
+    :key="index"
+  >
     <div class="d-flex p-2">
       <div>
         <a :href="item.url" target="_blank">
@@ -19,27 +19,38 @@
 <script>
 import { ref, reactive, computed, onMounted } from "vue";
 import { useStore } from "vuex";
-import axios from 'axios'
-
+import axios from "axios";
+let url = import.meta.env.VITE_API_URL
 
 export default {
   name: "NewsContent",
   setup(props) {
     const data = reactive({
-      topics: '今日のニュース',
       store: useStore(),
-    })
-    const getData = () => {
-      axios.get(import.meta.env.VITE_API_URL).then((result)=>{
+    });
+    const getData = (category) => {
+      let url = import.meta.env.VITE_API_URL
+      if(!category == ''){
+        url += '&topic=' + category
+      }
+      axios.get(url).then((result)=>{
         data.store.state.news = result.data.articles
       })
     }
+    const changecategory = () => {
+      data.store.watch(
+        (state, getters) => getters.getCategory,
+        (newValue, oldValue) => {
+          getData(newValue)
+        }
+    )}
     onMounted(() => {
-      getData()
-    })
+      getData('')
+      changecategory()
+    });
     return {
-      data
-    }
-  }
+      data,
+    };
+  },
 };
 </script>
