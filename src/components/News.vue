@@ -5,13 +5,15 @@
     :key="index"
   >
     <div class="d-flex p-2">
-      <div>
+      <div class="news-content">
         <a :href="item.url" target="_blank">
           <p class="h5 text-left">{{ item.title }}</p>
         </a>
         <p class="text-left mt-5">{{ item.description }}</p>
       </div>
-      <img :src="item.image" class="img-responsive" width="200" />
+      <div>
+        <img :src="item.image" class="img-responsive image" />
+      </div>
     </div>
   </section>
 </template>
@@ -54,3 +56,13 @@ export default {
   },
 };
 </script>
+
+<style>
+.news-content{
+  width: 85%;
+}
+.image{
+  width: 150px;
+  height: auto;
+}
+</style>
